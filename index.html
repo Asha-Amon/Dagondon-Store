@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Axel and Lians Merchandise Shop</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="C:\Users\CLienT\Desktop\EBNER - BSCS\CSS\AxelAndLiansMechandiseShop.css">
+</head>
+
+<body>
+<header>
+	<div class="wrap">
+	<a class="logo" href="#top">Axel and Lians Merchandise Shop</a>
+	<nav>
+		<a class="hide" href="#shop">Shop</a>
+		<a class="hide" href="#visit">Book a Visit</a>
+		<a class="hide" href="#contact">Contact Us</a>
+		<button class="cart-btn" onclick="toggleCart(true)">Cart(<span id="count">0</span>)</button>
+	</nav>
+	</div>
+</header>
+
+<main id="top">
+<div class="hero">
+	<div class="wrap">
+		<h1>Good finds, ready to buy online and in store.</h1>
+		<p>Order from your own home, check what is on the shelf before you travel, or have fun and visit us.</p>
+		<a class="btn" href="#visit">Book a Visit or a Ticket</a>
+	</div>
+</div>
+
+<section id="shop">
+	<div class="wrap">
+		<h2>Merchandise</h2>
+		<p class="sub">Each item shows if it is in stock at store. <br>
+		Not sure if it is? Tap "Ask about availability" and message us.</p>
+		<div class="grid" id="products">
+		</div>
+	</div>
+</section>
+
+<section class="book" id="visit">
+	<div class="wrap">
+		<h2>Book a Visit or Buy Tickets</h2>
+		<p class="sub">Pick a date and time</p>
+		<div class="cols">
+			<form id="bookForm">
+				<label for="type">What are you booking?</label>
+				<select id="type">
+					<option>Shop Visit</option>
+					<option>Event Ticket</option>
+					<option>Product pickup</option>
+				</select>
+
+				<label for="name">Full Name</label>
+				<input id="name" required autocomplete="name">
+
+				<div class="row">
+					<div>
+						<label for="date">Date</label>
+						<input type="date" id="date" required>
+					</div>
+					<div>
+						<label for="time">Time</label>
+						<select id="time">
+							<option>10:00 AM</option>
+							<option>11:00 AM</option>
+							<option>1:00 PM</option>
+							<option>2:00 PM</option>
+							<option>3:00 PM</option>
+							<option>4:00 PM</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div>
+						<label for="qty">Number of people / tickets</label>
+						<input type="number" id="qty" min="1" max="20" value="1" required>
+					</div>
+					<div>
+						<label for="phone">Phone or email</label>
+						<input id="phone" required autocomplete="tel">
+					</div>
+				</div>
+
+				<label for="msg">Notes (optional)</label>
+				<textarea id="msg" rows="3" placeholder="Items you want to see, special requests..."></textarea>
+				<button class="btn dark" type="submit">Request booking</button>
+				<p class="note">Your booking opens as a ready-to-send email. To receive bookings automatically, connect this form to a service like Formspree or Google Forms.</p>
+				<div class="ok" id="ok" role="status">Booking request ready. Send the email that just opened to finish.</div>
+			</form>
+
+			<aside class="info">
+				<h3>Visit us</h3>
+				<ul>
+					<li><strong>Address</strong><br>Chocolate Hills, Carmen Bohol, Philippines</li>
+					<li><strong>Hours</strong><br>Mon to Sat: 10 AM to 6 PM<br>Sunday: Closed</li>
+					<li><strong>Walk-ins</strong><br>Welcome. Booking guarantees a staff member is free for you.</li>
+					<li><a href="https://maps.app.goo.gl/4K4s8pNFrWGUXnbE6" target="_blank" rel="noopener">Open in Google Maps</a></li>
+				</ul>
+			</aside>
+		</div>
+	</div>
+</section>
+
+<section id="contact">
+	<div class="wrap">
+		<h2>Check availability or ask us anything</h2>
+		<p class="sub">We reply fastest on messaging apps during store hours.</p>
+		<div class="links">
+			<a class="btn dark" href="#contact" onclick="copyPhone(event)">Call Us</a>
+			<a class="btn dark" href="https://www.facebook.com/messages/e2ee/t/30102261546027832" target="_blank" rel="noopener">Messenger</a>
+			<a class="btn dark" href="#contact" onclick="copyEmail(event)">Email</a>
+			<a class="btn dark" href="https://instagram.com/allai.ca" target="_blank" rel="noopener">Instagram</a>
+		</div>
+	</div>
+</section>
+</main>
+
+<footer>- | - &copy; - | - 2026 Axel and Lians Merchandise Shop - | - All rights reserved - </footer>
+
+
+<aside id="drawer" aria-label="Shopping cart">
+	<button class="close" onclick="toggleCart(false)" aria-label="Close cart">&times;</button>
+	<h3>Your cart</h3>
+	<div id="items"></div>
+	<div class="total">Total: <span id="total">₱0.00</span></div>
+	<p class="note" style="margin:0 0 10px">Pay with <strong>GCash</strong>: send the total to <strong id="gcash"></strong> and keep your reference number.</p>
+	<button class="btn" style="margin-bottom:8px" onclick="copyGcash()">Copy GCash number</button>
+	<button class="btn dark" onclick="checkout()">Place order by email</button>
+	<p class="note">After paying, place your order by email and include your GCash reference number so we can confirm it.</p>
+</aside>
+
+<script>
+
+const CONTACT_EMAIL = "tcshs.ebner.alysha@gmail.com";
+const CONTACT = "0920 690 2916";
+const MESSENGER_LINK = "https://www.facebook.com/messages/e2ee/t/30102261546027832";
+const GCASH_NUMBER = CONTACT; // change if your GCash number is different
+const products = [
+  {id:1,name:"Chocolate Hills TShirt",price:250,stock:"in",icon:"👕",color:"#f6d9a8"},
+  {id:2,name:"Chocolate Hills Ceramic Mug",price:120,stock:"low",icon:"☕",color:"#cfe4e0"},
+  {id:3,name:"Tarsier T-Shirt",price:250,stock:"in",icon:"👕",color:"#dfe0f5"},
+  {id:4,name:"Tarsier Keychain",price:80,stock:"online",icon:"⭐",color:"#fbd5d0"},
+  {id:5,name:"Handmade Straw Hat",price:1500,stock:"in",icon:"👒",color:"#e3efc9"},
+  {id:6,name:"Everything Gift Bag",price:2500,stock:"out",icon:"🎒",color:"#e5e5e5"}
+];
+const labels = {in:["In stock at the store","in"],low:["Low stock in store","low"],online:["Online only","online"],out:["Sold out","out"]};
+let cart = [];
+const money = n => "₱" + n.toFixed(2);
+
+document.getElementById("products").innerHTML = products.map(p => {
+  const [text, cls] = labels[p.stock];
+  return `<article class="product">
+    <div class="thumb" style="--c:${p.color}" aria-hidden="true">${p.icon}</div>
+    <div class="pbody">
+      <h3>${p.name}</h3>
+      <span class="price">${money(p.price)}</span>
+      <span class="badge ${cls}">${text}</span>
+      <div class="actions">
+        <button class="add" onclick="addToCart(${p.id})" ${p.stock==="out"?"disabled":""}>${p.stock==="out"?"Sold out":"Add to cart"}</button>
+        <a class="ask" href="${MESSENGER_LINK}" target="_blank" rel="noopener" onclick="copyAsk(${p.id})">Ask about availability</a>
+      </div>
+    </div></article>`;
+}).join("");
+
+
+function copyAsk(id){
+  const p = products.find(x=>x.id===id);
+  const msg = "Hello! Is the " + p.name + " available?";
+  try{ navigator.clipboard.writeText(msg); }catch(e){}
+  const t = document.createElement("div");
+  t.textContent = "Message copied. Paste it in Messenger and press send.";
+  t.style.cssText = "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#16251e;color:#fff;padding:12px 18px;border-radius:8px;z-index:50;font-size:.95rem;max-width:90%;text-align:center";
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),4000);
+}
+function addToCart(id){cart.push(products.find(p=>p.id===id));drawCart();toggleCart(true)}
+function removeItem(i){cart.splice(i,1);drawCart()}
+function drawCart(){
+  document.getElementById("count").textContent = cart.length;
+  document.getElementById("items").innerHTML = cart.length
+    ? cart.map((p,i)=>`<div class="item"><span>${p.name}<br><small>${money(p.price)}</small></span><button onclick="removeItem(${i})">Remove</button></div>`).join("")
+    : "<p class='note'>Your cart is empty. Add something from the shop.</p>";
+  document.getElementById("total").textContent = money(cart.reduce((s,p)=>s+p.price,0));
+}
+function toggleCart(open){document.getElementById("drawer").classList.toggle("open",open)}
+function copyPhone(e){
+  e.preventDefault();
+  const num = CONTACT.replace(/\s/g,"");
+  try{ navigator.clipboard.writeText(num); }catch(err){}
+  const t = document.createElement("div");
+  t.textContent = "Phone number copied: " + CONTACT;
+  t.style.cssText = "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#16251e;color:#fff;padding:12px 18px;border-radius:8px;z-index:50;font-size:.95rem;max-width:90%;text-align:center";
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
+function copyEmail(e){
+  e.preventDefault();
+  try{ navigator.clipboard.writeText(CONTACT_EMAIL); }catch(err){}
+  const t = document.createElement("div");
+  t.textContent = "Email address copied: " + CONTACT_EMAIL;
+  t.style.cssText = "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#16251e;color:#fff;padding:12px 18px;border-radius:8px;z-index:50;font-size:.95rem;max-width:90%;text-align:center";
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
+function copyGcash(){
+  try{ navigator.clipboard.writeText(GCASH_NUMBER.replace(/\s/g,"")); }catch(e){}
+  const t = document.createElement("div");
+  t.textContent = "GCash number copied. Open GCash, send the total, and keep your reference number.";
+  t.style.cssText = "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#16251e;color:#fff;padding:12px 18px;border-radius:8px;z-index:50;font-size:.95rem;max-width:90%;text-align:center";
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),4000);
+}
+function sendMail(subject, body){
+  // Opens a ready-to-send Gmail message in a new tab (works without a mail app installed)
+  const url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(CONTACT_EMAIL)
+    + "&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  const w = window.open(url, "_blank", "noopener");
+  if(!w){ location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+}
+function checkout(){
+  if(!cart.length){alert("Your cart is empty.");return}
+  const lines = cart.map(p=>"- "+p.name+" ("+money(p.price)+")").join("\n");
+  const body = "Hi! I'd like to order:\n"+lines+"\n\nTotal: "+document.getElementById("total").textContent+"\n\nPayment: GCash to "+GCASH_NUMBER+"\nGCash reference number:\nName:\nDelivery or pickup:\n";
+  sendMail("New order", body);
+}
+
+const dateInput = document.getElementById("date");
+const now = new Date();
+dateInput.min = now.getFullYear() + "-" + String(now.getMonth()+1).padStart(2,"0") + "-" + String(now.getDate()).padStart(2,"0");
+
+document.getElementById("bookForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const v = id => document.getElementById(id).value;
+  const body = `Booking request\n\nType: ${v("type")}\nName: ${v("name")}\nDate: ${v("date")}\nTime: ${v("time")}\nPeople/tickets: ${v("qty")}\nContact: ${v("phone")}\nNotes: ${v("msg")}`;
+  document.getElementById("ok").style.display = "block";
+  sendMail(v("type")+" - "+v("date"), body);
+});
+document.getElementById("gcash").textContent = GCASH_NUMBER;
+drawCart();
+</script>
+</body>
+</html>

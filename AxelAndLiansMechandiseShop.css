@@ -1,0 +1,79 @@
+:root{
+  --ink:#16251e; --paper:#f2f6f3; --card:#ffffff; --teal:#0f766e;
+  --gold:#f2a900; --line:#d3ddd6; --muted:#566a60; --danger:#b42318;
+}
+
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Bricolage Grotesque",system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1080px;margin:auto;padding:0 20px}
+section{padding:56px 0}
+h1,h2,h3{line-height:1.15}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:8px}
+.sub{color:var(--muted);margin-bottom:28px;max-width:60ch}
+
+
+header{position:sticky;top:0;z-index:20;background:var(--ink);color:#fff}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:12px}
+.logo{font-weight:800;font-size:1.25rem;text-decoration:none}
+nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+nav a{text-decoration:none;font-size:.95rem}
+nav a:hover{color:var(--gold)}
+.cart-btn{background:var(--gold);color:var(--ink);border:0;border-radius:8px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer}
+
+
+.hero{background:var(--ink);color:#fff;padding:64px 0 72px}
+.hero h1{font-size:clamp(2.3rem,7vw,4.2rem);font-weight:800;max-width:14ch}
+.hero p{margin:18px 0 28px;max-width:52ch;color:#cfe0d6;font-size:1.1rem}
+.btn{display:inline-block;background:var(--gold);color:var(--ink);padding:12px 22px;border-radius:8px;font-weight:600;text-decoration:none;border:0;font:inherit;font-weight:600;cursor:pointer}
+.btn.alt{background:transparent;color:#fff;border:2px solid #fff;margin-left:8px}
+.btn.dark{background:var(--teal);color:#fff}
+
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.product{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{height:170px;display:grid;place-items:center;font-size:3.4rem;background:var(--c,#dfe9e3)}
+.pbody{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.price{font-weight:800;font-size:1.2rem}
+.badge{align-self:flex-start;font-size:.8rem;font-weight:600;padding:3px 10px;border-radius:99px}
+.in{background:#d9f2e4;color:#14532d}
+.low{background:#fde9b8;color:#7a4b00}
+.online{background:#dbe7fb;color:#1e3a8a}
+.out{background:#fbdcd8;color:var(--danger)}
+.actions{margin-top:auto;display:flex;flex-direction:column;gap:8px;padding-top:8px}
+.actions button,.actions a{font:inherit;font-size:.92rem;text-align:center;padding:9px;border-radius:8px;cursor:pointer;text-decoration:none}
+.add{background:var(--ink);color:#fff;border:0}
+.add:disabled{background:#9aa9a1;cursor:not-allowed}
+.ask{border:1.5px solid var(--teal);color:var(--teal)}
+
+
+.book{background:#e3ece6}
+.cols{display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
+form,.info{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
+label{display:block;font-weight:600;font-size:.92rem;margin:14px 0 4px}
+input,select,textarea{width:100%;font:inherit;padding:10px;border:1.5px solid var(--line);border-radius:8px;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+form .btn{margin-top:20px;width:100%}
+.note{font-size:.88rem;color:var(--muted);margin-top:10px}
+.ok{display:none;margin-top:16px;padding:14px;border-radius:8px;background:#d9f2e4;color:#14532d}
+.info ul{list-style:none;padding:0}
+.info li{padding:10px 0;border-bottom:1px solid var(--line)}
+.info li:last-child{border:0}
+
+
+.links{display:flex;flex-wrap:wrap;gap:12px}
+footer{background:var(--ink);color:#b9ccc1;padding:28px 0;text-align:center;font-size:.9rem}
+
+
+#drawer{position:fixed;top:0;right:0;height:100%;width:min(380px,100%);background:#fff;z-index:30;padding:22px;transform:translateX(100%);transition:transform .25s;box-shadow:-8px 0 30px rgba(0,0,0,.2);display:flex;flex-direction:column}
+#drawer.open{transform:none}
+#items{flex:1;overflow:auto;margin:14px 0}
+.item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.item button{border:0;background:none;color:var(--danger);cursor:pointer;font:inherit}
+.total{font-weight:800;font-size:1.2rem;margin-bottom:12px}
+.close{align-self:flex-end;border:0;background:none;font-size:1.6rem;cursor:pointer}
+
+@media(max-width:760px){.cols{grid-template-columns:1fr}.btn.alt{margin:10px 0 0}nav a.hide{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
